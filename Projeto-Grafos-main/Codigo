@@ -1,0 +1,189 @@
+#Apresentação do grupo:
+print("|PROJETO DE TEORIA DOS GRAFOS (CA2330)|\n")
+print("-> INTEGRANTES DO GRUPO:")
+print("Alan Daiki Suga: 24.122.051-6")
+print("Murilo Darce Borges Silva: 24.122.031-8")
+print("Pedro Munhoz Rosin: 24.122.013-6")
+
+#Impressão da matriz:
+print("\n-> MATRIZ DE ADJACÊNCIA:")
+ctd = 0
+abrir = open('A.txt', 'r')
+linha = abrir.readlines()
+for l in linha:
+    ctd += 1
+    print(l.strip())
+abrir.close()
+
+#Parte 1:
+m = []
+abrir = open('A.txt', 'r')
+linha = abrir.readlines()
+
+# separa os elementos e adiciona na lista "linhaa"
+m = []
+for j in linha:
+    linhaa = []
+    for elem in j.split():
+
+        elemento = int(elem)
+        linhaa.append(elemento)
+    m.append(linhaa)
+
+abrir.close()
+
+#nao precisa mais abrir o arquivo( acho ¯\_(ツ)_/¯ )
+print()
+
+#variaveis tipo bool pra identificar se sao:
+#0 (falso) = 1(verdadeiro)
+simples = 1
+completo = 1
+regular = 1
+bipartido = 1
+bip_completo = 1
+
+#####################################################################
+
+lacos = []
+cont_lacos = 0
+amult_in = []
+amult_out = []
+arestas_multiplasqtd = 0
+
+#VERIFICA SE O GRAFO EH SIMPLES============================
+
+for i in range(len(m)):
+    if m[i][i] != 0:
+        lacos.append(i+1)#salvar o vertice que possui o laco
+        cont_lacos += m[i][i]#contar quantos lacos tem
+        simples = 0
+    for j in range(len(m[i])):        
+        #VERIFICANDO SE EH SIMPLES
+        #VERIFICA SE EXISTE LACO
+        #VERIFICA SE EXISTEM ARESTAS MULTIPLAS
+        if m[i][j]>1:
+            simples = 0
+
+#QUANTIDADE DE ARESTAS=======================================
+qtd_aresta=0
+for i in range(len(m)):
+    for j in range(i+1):
+        qtd_aresta+=m[i][j]
+        if m[i][j]>1:
+            amult_in.append(i)
+            amult_out.append(j)
+            arestas_multiplasqtd+= 1
+
+#VERIFICA SE O GRAFO EH COMPLETO & VERIFICA O GRAU DO GRAFO TBM
+graus = []
+graus_cres = []
+
+for i in range(len(m)):
+    aux = 0
+    for j in range(len(m[i])):
+        aux +=m[i][j]
+        if i!=j and m[i][j]==0:
+            completo=0
+    graus.append(aux)
+    graus_cres.append(aux)
+
+
+
+#SOMA +1 DE GRAU PARA QUANTIDADE DE LACOS NOS DEVIDOS VERTICES
+for i in range(len(m)):
+    if m[i][i] != 0:
+        graus[i]+=1
+        graus_cres[i]+=1
+
+graus_cres.sort(reverse = True)
+
+#===================================REGULAR====================================
+for i in range(1, len(graus)):
+    if graus[i-1]!=graus[i] and graus[i]>=2:
+        regular = 0
+        break
+      
+#=================================BIPARTIDO===================================
+aux1 = []
+aux2 = []
+
+
+for i in range(len(m)):
+  if i not in aux2:
+    aux1.append(i)  #separa os vertices em 2 grupos, aux1(x) e aux2(y)
+    for j in range(len(m)):
+        if m[i][j]>0:
+          if j not in aux2:
+            aux2.append(j)
+#se existir um vertice no aux1 e aux2, nao eh bipartido
+for i in range(len(aux1)):
+    for j in range(len(aux2)):
+        if aux1[i]==aux2[j]:
+            bipartido = 0
+if bipartido==1:
+#   verifica se eh bipartido completo
+#para ser bip_completo, o grau de cada vertice de aux1 deve ser >= ao len(aux2) (pode ter arestas multiplas)
+    for i in range(len(aux1)):
+        
+        if graus_cres[i]<len(aux2):
+            bip_completo=0
+elif bipartido==0:
+    bip_completo = 0
+#================================PRINTS===================================
+
+#Simples------------------------------------------------------------------
+if simples == 0 : # simples = falso
+    print("1 - O Grafo não é simples, pois:\n")
+    if(cont_lacos>0):
+        print("- Possui %i laço(s)" %cont_lacos)
+        print("- Possui laço(s) no(s) vértice(s): ", end = "")
+        for i in lacos:
+            print(i, end = " ")
+        print()
+    if(arestas_multiplasqtd>0):
+        print("- Possui %i arestas multiplas entre os vértices: " %arestas_multiplasqtd, end = "")
+        for i in range(len(amult_out)):
+            print("(%i -> %i)" %(amult_in[i], amult_out[i]), end = " ")
+    print("\n")
+elif simples == 1: #simples = verdadeiro
+    print("1 - O Grafo é simples, pois não possui arestas duplas ou laços.\n")
+
+#Grau do grafo-------------------------------------------------------------
+print("2 - Sequencia dos graus do grafo (ordem não crescente):\n")
+for i in graus_cres:
+    for j in range(len(graus)):
+        if graus[j]==i:
+            print("Vértice %i - grau: %i" %(j+1, i))
+            graus[j]=-1
+
+#Quantidade de arestas-----------------------------------------------------
+print("\n3 - Quantidade de arestas: %i\n" %qtd_aresta)
+
+#Completo-------------------------------------------------------------------
+if completo == 0 :
+    print("4 - O Grafo não é completo, pois nem todas as arestas estão interligadas.\n")
+elif completo ==1:
+    print("4 - O Grafo é completo, pois todos os vértices são adjacentes aos outros vértices.\n")
+    
+#----Grafo Regular----------------------------------------------------------
+if regular==0:
+    print("5 - O Grafo não é regular, pois nem todos os vértices possuem mesmo grau.\n")
+elif regular==1:
+    print("5 - O Grafo é regular, pois todos os seus vértices possuem a mesma quantidade de graus.\n")
+    print("Todos os vértices são de grau %d\n" %graus_cres[1])
+    
+#GRAFO BIPARTIDO E BIP COMPLETO============================================================
+if bipartido==0:
+    print("6 - O Grafo não é bipartido\n")
+elif bipartido ==1 :
+    print("6 - O Grafo é bipartido, pois possui bipartição em X e Y\n")
+    print("X: ",aux1)
+    print("Y: ",aux2)
+
+    if bip_completo==0:
+        print("\n6 - O Grafo é bipartido incompleto\n")
+    elif bip_completo == 1:
+        print("6 - O Grafo é bipartido completo, pois todos os vértices de X possuem ligação em Y.\n")
+        print("X: ",aux1)
+        print("Y: ",aux2)
