@@ -1,0 +1,44 @@
+{"intents":[
+  { "tag": "saudacao",
+    "patterns":["Ola","Opa","Oi", "tudo bem","como vai"],
+    "responses": ["Oi","Olá"]
+  },
+  { "tag": "despedida",
+    "patterns":["valeu","tchau","Obrigado","fui","beleza"],
+    "responses": ["Até breve","Falou"]
+  },
+  { "tag": "data_prova",
+    "patterns":["Quando sera a prova?","A prova será em que dia?","vai ter exame?"],
+    "responses": ["no dia 26"]
+  },
+  {
+    "tag": "PIPE",
+    "patterns": ["Pipe?","O que é pipe?","Explique pipe?","Oque é pipe?"],
+    "responses": ["O PIPE-FAPESP apoia a execução de pesquisa científica e/ou tecnológica em micro, \npequenas e médias empresas no Estado de São Paulo."]
+  },{
+    "tag": "Objetivos",
+    "patterns": ["Quais os objetivos do PIPE?","Pra que serve?","Ajuda em que?"],
+    "responses": ["1. Apoiar a pesquisa em ciência e tecnologia como instrumento para promover a inovação tecnológica, \npromover o desenvolvimento empresarial e aumentar a competitividade das pequenas empresas.\n2. Incrementar a contribuição da pesquisa para o desenvolvimento econômico e social.\n3. Induzir o aumento do investimento privado em pesquisa tecnológica.\n4. Possibilitar que as empresas se associem a pesquisadores do ambiente acadêmico em projetos de pesquisa visando à inovação tecnológica.\n5. Contribuir para a formação e o desenvolvimento de núcleos de desenvolvimento tecnológico nas empresas e para o emprego de pesquisadores no mercado."]
+  },{
+    "tag": "PPI",
+    "patterns": ["Qual a política de propriedade intelectual?","Qual a PPI?"],
+    "responses": ["As empresas apoiadas pelo Programa Pesquisa Inovativa em Pequenas Empresas (PIPE) detém exclusivamente os direitos legais de propriedade intelectual dos resultados das pesquisas financiadas, sem a exigência de compartilhamento com a Fundação.\nA empresa, portanto, poderá explorar, licenciar e proteger os resultados do projeto apoiado pela Fundação da forma que achar mais conveniente, seguindo sua estratégia de negócio, devendo manter a FAPESP informada em relação à propriedade intelectual para fins de acompanhamento.\nAs regras de propriedade intelectual estão disponíveis em fapesp.br/pi."]
+  },{
+    "tag": "Etapas",
+    "patterns": ["Quais as etapas do PIPE?","Quais as Fases do PIPE?","Etapas?","Fases?"],
+    "responses": ["a) Fase 1: é destinada à verificação da viabilidade técnico-científica da proposta, (duração de até 9 meses e orçamento de até R$ 300.000, mais Reserva Técnica e Benefícios Complementares);\nb) Fase 2: destina-se à execução da pesquisa propriamente dita (duração de até 24 meses e orçamento de até R$ 1.500.000, mais Reserva Técnica e Benefícios Complementares);\nc) PIPE Invest: Aceleração da chegada ao mercado de Projetos da Fase 2, quando houver terceira parte interessada (duração de até 24 meses e orçamento de até R$ 1.500.000); e\nd) Fase 3: desenvolvimento comercial e industrial dos produtos, processos, sistemas e/ou serviços inovadores obtidos a partir de pesquisas anteriores realizadas pela pequena empresa sem o apoio da FAPESP ou a partir de pesquisa apoiada no âmbito do PIPE."]
+  },{
+    "tag": "Empresa",
+    "patterns": ["Preciso de empresa para solicitar PIPE?","Solicitar PIPE?"],
+    "responses": ["Não. A FAPESP analisa propostas de empresas ainda não constituídas. Empresas startup ainda não constituídas legalmente são incentivadas a submeter. \nNos casos em que a proposta for recomendada, o proponente deverá então abrir formalmente a empresa antes da concessão da proposta."]
+  },{
+    "tag": "Fora de SP",
+    "patterns": ["Pesquisas fora de SP tem direito?","Posso receber se for fora de SP?"],
+    "responses": ["O Pesquisador Responsável deverá residir no estado de São Paulo para ser elegível ao PIPE. Caso a empresa já esteja constituída fora do estado de São Paulo, \no pesquisador deverá submeter o projeto, obrigatoriamente, em nome dessa empresa. \nTer unidade de pesquisa constituída no estado de São Paulo (item 3.3 da norma) é condição para a concessão do processo. Adicionalmente, pesquisadores de outros estados que venham a instalar novas empresas em São Paulo e se tornem residentes no estado, também são elegíveis."]
+  },{
+    "tag": "Mais Info",
+    "patterns": ["Onde posso achar mais informações?","Ainda tenho dúvidas","Mais ajuda","Mais informações"],
+    "responses": ["O site fapesp.br/pipe apresenta em detalhes o programa, incluindo o texto completo das normas e as chamadas vigentes. Adicionalmente, de forma periódica, \nacontece o evento “Diálogo sobre Apoio à Pesquisa para Inovação na Pequena Empresa” no qual o programa PIPE é apresentado e os membros da coordenação tiram dúvidas dos participantes (veja as próximas datas no site do PIPE)."]
+  }
+]
+}
