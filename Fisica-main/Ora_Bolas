@@ -1,0 +1,666 @@
+from tkinter import *
+
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+
+import math
+
+from pyparsing import col
+
+
+
+#!!Nao mostra o grafico que quero
+#Mas pode ser usado para fazer grafico da velocidade do robo e da bola
+
+#funcao que mostra o movimento da bola no campo
+
+def trajbola():
+   
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    #9+2.15
+
+    #criando figura (pro grafico ser projetado na janela)
+    #codigo copiado da internet
+
+    
+    
+    y=[]
+    x=[]
+    y_r = []
+    x_r = []
+    
+    plt.ylim(0,6)
+    plt.xlim(0,9)
+    for i in range(resulttest[0]):
+        y.append(-0.2*((i*0.02)**2) + 2.2*(i*0.02) + 0.5)
+        x.append(-0.282*((i*0.02)**2) + 2.623*(i*0.02 )+ 0.669)
+        x_r.append(mov_robo[0][i])
+        y_r.append(mov_robo[1][i])
+        plt.plot(x, y, color = 'blue')
+        plt.plot(x_r, y_r, color = 'red')
+        plt.pause(0.02)
+    plt.xlim(0, 9)
+    plt.ylim(0, 6)
+        
+###############
+###############
+def trajX():
+   
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    #9+2.15
+
+    #criando figura (pro grafico ser projetado na janela)
+    #codigo copiado da internet
+
+    
+    
+    x=[]
+    x_r = []
+    t = []
+    for i in range(resulttest[0]):
+        
+        x.append(-0.282*((i*0.02)**2) + 2.623*(i*0.02 )+ 0.669)
+        t.append(i*0.02)
+        x_r.append(mov_robo[0][i])
+        
+        plt.plot(t, x, color = 'blue')
+        plt.plot(t, x_r, color = 'red')
+        plt.pause(0.01)      
+    
+    
+    ######################
+    ######################
+    
+def trajY():
+   
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    #9+2.15
+
+    #criando figura (pro grafico ser projetado na janela)
+    #codigo copiado da internet
+
+    
+    
+    y=[]
+    y_r = []
+    t = []
+    
+    for i in range(resulttest[0]):
+        y.append(-0.2*((i*0.02)**2) + 2.2*(i*0.02) + 0.5)
+        y_r.append(mov_robo[1][i])
+        t.append(i*0.02)
+        
+        plt.plot(t, y, color = 'blue')
+        plt.plot(t, y_r, color = 'red')
+        plt.pause(0.01)
+        
+    plt.xlim(0, 9)
+    plt.ylim(0, 6)
+
+
+
+
+##
+#
+#
+##Funcao da velocidade do robo no grafico
+def velx_robo():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    
+    v = 0
+    vx = []
+    t = []
+    for i in range(0, resulttest[0]):
+        t.append(i*0.02)
+        if t[i]<1:
+            v = 2.8*i*0.02
+            v = math.cos(resulttest[1])*v
+            vx.append(v)
+        else:
+            v = math.cos(resulttest[1])*2.8
+            vx.append(v)
+        
+        plt.plot(t, vx, color = 'red', label = "Robo")
+        plt.pause(0.02)
+            
+
+def vely_robo():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    
+    v = 0
+    vy = []
+    t = []
+    for i in range(0, resulttest[0]):
+        t.append(i*0.02)
+        if t[i]<1:
+            v = 2.8*i*0.02
+            v = math.sin(resulttest[1])*v
+            vy.append(v)
+        else:
+            v = math.sin(resulttest[1])*2.8
+            vy.append(v)
+        
+        plt.plot(t, vy, color = 'red', label = "Robo")
+        plt.pause(0.02)
+###
+###
+
+def acelx_robo():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    acelx = []
+    
+    t = []
+
+    for i in range(0, resulttest[0]):
+        t.append(i*0.02)
+        if t[i]<1:
+            aux = math.cos(resulttest[1])*2.8
+            acelx.append(aux)
+        else:
+            acelx.append(0)
+       
+        plt.plot(t, acelx, color = 'red', label = "Robo")
+        plt.pause(0.02)
+###
+###
+
+def acely_robo():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    acely = []
+    
+    t = []
+    
+    
+    for i in range(0, resulttest[0]):
+        t.append(i*0.02)
+        if t[i]<1:
+            
+            aux = math.sin(resulttest[1])*2.8
+            acely.append(aux)
+        else:
+            acely.append(0)
+        plt.plot(t, acely, color = 'red', label = "Robo")
+        plt.pause(0.02)
+###
+
+
+
+##
+##
+
+def velx_bola():
+        
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    velXB = []
+    
+    t = []
+    
+    plt.ylim(0,3)
+    
+    for i in range(0, resulttest[0]):
+        
+        x = float(i*0.02)
+        t.append(i*0.02)
+        
+        aux = 2.623 - 0.564*x
+        velXB.append(aux)
+        plt.plot(t, velXB, color='blue')
+        plt.pause(0.0)
+##
+##
+
+def vely_bola():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    velYB = []
+    
+    t = []
+    
+    plt.ylim(0,3)
+    
+    for i in range(0, resulttest[0]):
+        t.append(i*0.02)
+        aux = (-0.4)*i*0.02 + 2.2
+        velYB.append(aux)
+        plt.plot(t, velYB, color='blue')
+        plt.pause(0.01)
+###
+###
+
+
+
+
+def acelx_bola():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    velYB = []
+    
+    t = []
+
+    
+    for i in range(0, resulttest[0]):
+        angulo = resulttest[1]
+        
+        t.append(i*0.02)
+        aux = math.cos(angulo)
+        velYB.append(aux*0.564)
+        plt.plot(t, velYB, color='blue')
+        plt.pause(0.01)
+###
+###
+
+def acely_bola():
+    
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    velYB = []
+    
+    t = []
+    
+    
+    for i in range(0, resulttest[0]):
+        angulo = resulttest[1]
+        
+        t.append(i*0.02)
+        aux = math.sin(angulo)
+        velYB.append(aux*0.4)
+        plt.plot(t, velYB, color='blue')
+        plt.pause(0.01)
+
+##
+##
+def dist_RB():
+
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+    
+    resulttest = formula(Rx0, Ry0)
+    
+    
+    mov_robo = tempo(resulttest,Rx0,Ry0)
+    
+    
+    dista = []
+    t = []
+    
+    plt.ylim(0,10)
+    for x in range(0, resulttest[0]): ##3.84 segundos para os cálculos (pois é a 1a parte dentro da quadra)
+        testimado = x*0.02
+        Rx0 = mov_robo[0][x]
+        
+        Ry0 = mov_robo[1][x]
+        
+        Px = -0.008*pow(testimado,3) - 0.17*pow(testimado,2) + 2.2*testimado + 1            
+        Py = -0.2*pow(testimado,2) + 2.2*testimado + 0.5
+        hip = calchip(Rx0,Ry0,Px,Py) ##acha a hip usando os pontos estimados, e o ponto 0 do robo
+       
+        dista.append(hip)
+        t.append(x*0.02)
+        plt.plot(t, dista, color = 'green')
+        plt.pause(0.02)
+        
+    
+    
+##
+##
+
+
+##CODIGOS DO RODRIGO
+
+def calchip(Rx0,Ry0,Px,Py): ##acha a hip de dist.
+    deltax = Px - Rx0
+    deltay = Py - Ry0
+    hip = math.sqrt(pow(deltax,2) + pow(deltay,2))
+    return hip
+
+#
+#
+def tempo(resulttest,Rx0,Ry0): ##rodar após o robo ter feito o calculo dele
+    
+    mov_bolax = []
+    mov_bolay = []
+    angulo = resulttest[1]
+    tempoestimado = resulttest[0]
+    temposalvo = 0
+    alerta = 0
+    
+    
+    for t in range(tempoestimado+1):
+        ##distmax = 999999
+        if tempoestimado == 358: 
+            
+            distmax = resulttest[2] ##simular freio!!!! (1 seg até parada completa)
+        
+        
+        tempo = t*0.02
+        if tempo <=1:
+            S = 1.4*pow(tempo,2)
+        ##if S+1.4 >= distmax:
+        #    alerta=1
+        #    
+        #    if temposalvo == 0:
+        #        
+        #        temposalvo = tempo
+        #        print("temposalvo = %f"%(temposalvo))
+        #    if (tempo-temposalvo) <= 1:
+        #        print("temposalvo dentro e tempo: %f %f"%(temposalvo,tempo))
+        #        variavel = tempo-temposalvo
+        #        
+        #        S = 1.4 + 2.8*(tempo-1) - 1.4*pow(variavel,2)
+            
+        if tempo >= 1 and alerta==0:
+            
+            S = 1.4 + 2.8*(tempo-1)
+        
+        
+        
+        
+        Rx = ((S) * math.cos(angulo)) + Rx0
+        Ry = ((S) * math.sin(angulo)) + Ry0
+        
+        mov_bolax.append(Rx)
+        mov_bolay.append(Ry)
+        #colocar o resto das formulas para ir para o grafico aqui
+        ##ligar a lista da bola aqui pra printar tbm a posição dela e confirmar se chega
+        
+        
+        By = (-0.2*((t*0.01)**2) + 2.2*(t*0.01) + 0.5)
+        Bx = (-0.282*((t*0.01)**2) + 2.623*(t*0.01 )+ 0.669)
+        
+        
+        print("pos atual da bola (%.2f, %.2f)"%(Bx,By))
+        print("dist percorrida pelo robo %lf"%(S))
+        #print(distmax)
+        print("t = %.2f"%(tempo))
+        print("pos atual do robo (%.2f, %.2f)"%(Rx,Ry))
+    return mov_bolax, mov_bolay
+
+
+
+
+
+
+
+
+##FORMULA DO ROBO SE APROXIMANDO dA BOLA
+
+
+
+
+def formula(Rx0,Ry0): ##checa se é possível
+    for x in range(0,193): ##3.84 segundos para os cálculos (pois é a 1a parte dentro da quadra)
+        testimado = x*0.02
+        print("Tempo: %.2f" %(testimado))
+        Px = -0.008*pow(testimado,3) - 0.17*pow(testimado,2) + 2.2*testimado + 1            
+        Py = -0.2*pow(testimado,2) + 2.2*testimado + 0.5
+        hip = calchip(Rx0,Ry0,Px,Py) ##acha a hip usando os pontos estimados, e o ponto 0 do robo
+        
+        S = 2.8*pow(testimado,2)/2
+        
+        if (testimado >= 1):
+            S = 1.4 + 2.8*(testimado - 1)
+            print("distancia que o robo percorre: %.4f"%(S))
+        if (hip - S <= 0.1110): ##0.1115 é o raio de interceptação, tirei 0.0005 por margem de erro nos calc
+            print("FINAL\n")
+            
+            angulo = (math.atan((Py-Ry0)/(Px-Rx0)))
+            if Px < Rx0:
+                angulo += 1*math.pi
+                
+                
+            print("angulo final do robo ate bola: %f graus"%(math.degrees(angulo)))
+            
+            
+            print("distancia final entre o robo e a bola: %.4f metros" %(hip -S))
+            
+            
+            Rx = ((S) * math.cos(angulo)) + Rx0
+            Ry = ((S) * math.sin(angulo)) + Ry0
+        
+        
+            print("calc test x robo: %f" %(Rx))
+            print("calc test y robo: %f" %(Ry))
+            
+            
+            print("Px final estimado da bola: %f" %(Px))
+            print("Py final estimado da bola: %f" %(Py))
+            
+
+            return x,angulo
+            
+        print("distancia entre robo/bola:%.4f "%(hip-S)) ##info de excel // dist entre robo e bola
+    print("Passou de 3.84 seg!")
+    input()
+    for x in range(358,471): ##caso não chegue até 3.84, esse testa de 7.16 até 9.40 !!! bugadasso !!!!
+        testimado = x - 358
+        testimado = testimado * 0.02
+        print("Tempo: %.2f" %(x*0.02))
+        Px = (-0.008 * pow(testimado,3)) + (-0.3418 * pow(testimado,2)) + (-1.4646*testimado) + 5.1
+        Py = (-0.2*pow(testimado,2)+(-0.6639*testimado)+5.999)
+        hip = calchip(Rx0,Ry0,Px,Py) ##acha a hip usando os pontos estimados, e o ponto 0 do robo
+        S = 1.4 + 2.8*((x*0.02)-1)
+        print("S = %.3f"%(S))
+        print("hip = %.3f"%(hip))
+        if (hip - S <= 0.1110): ##0.1115 é o raio de interceptação, tirei 0.0005 por margem de erro nos calc
+            print("FINAL\n")
+            angulo = (math.atan((Py-Ry0)/(Px-Rx0)))
+            if Px < Rx0:
+                angulo += 1*math.pi
+                
+                
+            print("(apos 3.84) angulo final do robo ate bola: %f graus"%(math.degrees(angulo)))
+            
+            
+            print("(apos 3.84) distancia final entre o robo e a bola: %.4f metros" %(hip -S))
+            
+            
+            Rx = ((S) * math.cos(angulo)) + Rx0 ## tem que mudar
+            Ry = ((S) * math.sin(angulo)) + Ry0 ## tem que mudar
+            if (S - hip >= 0.1110):
+                Rx = ((hip * math.cos(angulo))+Rx0)
+                Ry = ((hip *math.sin(angulo))+Ry0)
+                
+            
+                
+                
+                
+            
+                
+            print("calc test x robo: %f" %(Rx))
+            print("calc test y robo: %f" %(Ry))
+            
+            
+            print("Px final estimado da bola: %f" %(Px))
+            print("Py final estimado da bola: %f" %(Py))
+            
+
+            return x,angulo,hip
+    testimado = (470 - 358)*0.02
+    Px = (-0.008 * pow(testimado,3)) + (-0.3418 * pow(testimado,2)) + (-1.4646*testimado) + 5.1
+    Py = (-0.2*pow(testimado,2)+(-0.6639*testimado)+5.999)
+    angulo = (math.atan((Py-Ry0)/(Px-Rx0)))
+    if Px < Rx0:
+        angulo += 1*math.pi
+    Rx = ((S) * math.cos(angulo)) + Rx0
+    Ry = ((S) * math.sin(angulo)) + Ry0
+    print("calc test x robo: %f" %(Rx))
+    print("calc test y robo: %f" %(Ry))
+    print("Px final estimado da bola: %f" %(Px))
+    print("Py final estimado da bola: %f" %(Py))
+    return 0,0
+
+
+
+#####################################################################
+
+
+
+#funcao principal----------------------------------------------------------------------------------------
+def pag():
+    #Janela TKinter
+    janela = Tk()
+    janela.title("Ora Bolas")
+    janela.geometry('500x500')
+
+    #pagina inicial
+    Label(janela, text="Projeto Ora Bolas", font=("Arial Bold", 14)).place(relx=0.5, rely=0.2, anchor=CENTER)
+    
+    #--------INPUT PARA AS POSICOES INICIAIS DO ROBO--------------------
+
+    Rx0 = float(EntradaRx0.get())
+    Ry0 = float(EntradaRy0.get())
+
+
+    print(Rx0, Ry0)#print so para testar//apagar mais tarde
+    
+    #---------Botoes: Bola x Robo GRAFICO ---------------------------------------------------
+    
+    Label(janela, text="Bola x Robo", font=("Arial Bold", 11)).place(relx=0.3, rely=0.35, anchor=CENTER)
+    
+    # trajetoria da bola e do robo plano xy
+    Button(janela, text=" Graf. Bola x Robo XY ", command=trajbola).place(relx = 0.3, rely= 0.4, anchor=CENTER)
+    
+    # trajetoria da bola e do robo plano x tempo
+    Button(janela, text = "Graf. Bola x Robo X(t)", command = trajX).place(relx=0.3, rely = 0.45, anchor=CENTER)
+    
+    # trajetoria da bola e do robo plano y tempo
+    Button(janela, text = "Graf. Bola x Robo Y(t)", command = trajY).place(relx=0.3, rely = 0.5, anchor=CENTER)
+    
+    #botao: grafico distancia entre o robo e a bola
+    Button(janela, text = "Distancia Robo x Bola", command = dist_RB).place(relx=0.3, rely=0.55, anchor=CENTER)
+    
+    
+    
+    #--------------Botoes: Bola GRAFICO ------------------------------------------------------------
+    
+    Label(janela, text="Bola", font=("Arial Bold", 11)).place(relx=0.45, rely=0.35, anchor=CENTER)
+    
+
+    #botao: grafico da velX da bola
+    Button(janela, text = "Velocidade X", command = velx_bola).place(relx=0.45, rely=0.4, anchor=CENTER)
+    
+    #botao: grafico velY da bola
+    Button(janela, text = "Velocidade Y", command = vely_bola).place(relx=0.45, rely=0.45, anchor=CENTER)
+    
+    #botao: grafico acelX da bola
+    Button(janela, text = "Aceleracao X", command = acelx_bola).place(relx=0.45, rely=0.5, anchor=CENTER)
+    
+    #botao: grafico acelY da bola
+    Button(janela, text = "Aceleracao Y", command = acely_bola).place(relx=0.45, rely=0.55, anchor=CENTER)
+    
+    ##
+    
+    
+    #---------Botoes: Robo Grafico------------------------------------------
+    
+    
+    Label(janela, text="Robo", font=("Arial Bold", 11)).place(relx=0.6, rely=0.35, anchor=CENTER)
+    
+    #botao: grafico da velX da bola
+    Button(janela, text = "Velocidade X", command = velx_robo).place(relx=0.6, rely=0.4, anchor=CENTER)
+    
+    #botao: grafico velY da bola
+    Button(janela, text = "Velocidade Y", command = vely_robo).place(relx=0.6, rely=0.45, anchor=CENTER)
+    
+    #botao: grafico acelX da bola
+    Button(janela, text = "Aceleracao X", command = acelx_robo).place(relx=0.6, rely=0.5, anchor=CENTER)
+    
+    #botao: grafico acelY da bola
+    Button(janela, text = "Aceleracao Y", command = acely_robo).place(relx=0.6, rely=0.55, anchor=CENTER)
+    
+
+
+
+
+    janela.mainloop()
+
+
+
+Raio = 0
+t = 0
+Ra = 2.8 ## acel. max do robo
+
+pag_input = Tk()
+pag_input.title("Coordenadas iniciais do robo")
+pag_input.geometry("500x500")
+
+Label(pag_input, text="Projeto Ora Bolas", font=("Arial Bold", 14)).place(relx=0.5, rely=0.2, anchor=CENTER)
+
+#entrada: posicao inicial da bola
+EntradaRx0 = StringVar()
+EntradaRy0 = StringVar()
+#------------------------------------------------
+Rx0 = float(0)
+Ry0 = float(0)
+
+Entry(pag_input, textvariable=EntradaRx0).place(relx = 0.5, rely = 0.4, anchor="w")
+Entry(pag_input, textvariable=EntradaRy0).place(relx = 0.5, rely = 0.45, anchor = "w")
+Label(pag_input, text="PosicaoX inicial do robo:", font=("Arial Bold", 11)).place(relx= 0.5, rely=0.4, anchor = "e")
+Label(pag_input, text="PosicaoY inicial do robo:", font=("Arial Bold", 11)).place(relx=0.5, rely=0.45, anchor = "e")
+Button(pag_input, text= "Confirmar Posicao", command = pag).place(relx = 0.5, rely = 0.5, anchor="c")
+
+
+Label(pag_input, text="Alan Daiki Suga\nRA: 24.122.051-6", font=("Arial Bold", 11)).place(relx= 0.30, rely=0.6, anchor = "e")
+Label(pag_input, text="Rodrigo Simões Ruy\nRA: 24.122.092-0", font=("Arial Bold", 11)).place(relx=0.5, rely=0.6, anchor = "c")
+
+
+
+pag_input.mainloop()
