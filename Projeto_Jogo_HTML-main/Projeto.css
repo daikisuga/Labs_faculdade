@@ -1,0 +1,33 @@
+body{
+    background-color: darkseagreen;
+}
+canvas{
+    position: relative;
+    display: block;
+    border: solid 3px black;
+    background-color: beige;
+    margin: auto;
+}
+.menu{
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    font-size: 25px;
+}
+a:hover{
+    color:red;
+}
+.titulo{
+    color: darkred;
+    text-align: center;
+    font-size: 30px;
+    margin-left: auto;
+    font-weight: bold;
+}
+button{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: available;
+}
