@@ -1,0 +1,32 @@
+from math import sqrt, acos
+print("Ângulo entre os vetores u e v:")
+print("Coordenadas do vetor u:")
+
+
+u = []
+v =[]
+e = 0
+mu=0
+mv = 0
+for i in range(0, 3):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    u.append(aux)
+    
+print("Coordenadas do vetor v:")
+
+for i in range(0, 3):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    v.append(aux)
+    
+for i in range(0, 3):
+    aux = u[i]*v[i]
+    mu += u[i]*u[i]
+    mv += v[i]*v[i]
+    e+=aux
+mu = sqrt(mu)
+mv = sqrt(mv)
+g = e/(mu*mv)
+g = acos(g)*180/3.141592
+
+print("Ângulo: %.2f graus" %g)
+

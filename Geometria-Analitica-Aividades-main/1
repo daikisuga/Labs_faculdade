@@ -1,0 +1,21 @@
+print("Produto Escalar:")
+n= int(input("Digite a dimensão dos vetores:"))
+print(" Coordenadas do vetor u:")
+
+
+u = []
+v =[]
+r = int(0)
+for i in range(0, n):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    u.append(aux)
+print("Coordenadas do vetor v:")    
+for i in range(0, n):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    v.append(aux)
+    
+for i in range(0, n):
+    aux = u[i]*v[i]
+    r+=aux
+
+print("Produto Escalar: %.2f" %(r))

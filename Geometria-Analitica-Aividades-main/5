@@ -1,0 +1,32 @@
+from math import sqrt
+
+print("Projeção Ortogonal do vetor u sobre o vetor v:")
+
+u = []
+v =[]
+e = 0
+mu=0
+mv = 0
+
+print("Coordenadas do vetor u:")
+
+for i in range(0, 3):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    u.append(aux)
+    
+print("Coordenadas do vetor v:")
+
+
+for i in range(0, 3):
+    aux = float(input("Digite a %ia. coordenada: " %(i+1)))
+    v.append(aux)
+    
+for i in range(0, 3):
+    aux = u[i]*v[i]
+    mu += u[i]*u[i]
+    mv += v[i]*v[i]
+    e+=aux
+mu = sqrt(mu)
+
+print("Projeção Ortogonal: %.2f/%.2f(%.2f, %.2f, %.2f)" %(e, mv, v[0],v[1],v[2]))
+print("Projeção Ortogonal: (%.2f, %.2f, %.2f)" %(v[0]*e/mv,v[1]*e/mv,v[2]*e/mv))
